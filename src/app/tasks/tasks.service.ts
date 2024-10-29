@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Task, TaskStatus } from './task.model';
 
-// Remove the Injectable for another approach in the Main.ts
+// Remove the Injectable for another approach in the Main.ts and Tasks.component.ts
 @Injectable({
   providedIn: 'root',
 })
