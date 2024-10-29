@@ -8,7 +8,9 @@ export class TasksService {
   static addTask(arg0: { title: string; description: string }) {
     throw new Error('Method not implemented.');
   }
-  tasks = signal<Task[]>([]);
+  private tasks = signal<Task[]>([]);
+
+  allTasks = this.tasks.asReadonly();
 
   addTask(taskData: { title: string; description: string }) {
     const newTask: Task = {
