@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Task, TaskStatus } from './task.model';
+import { LoggingService } from '../logging.service';
 
 // Remove the Injectable for another approach in the Main.ts and Tasks.component.ts
 @Injectable({
@@ -10,6 +11,7 @@ export class TasksService {
     throw new Error('Method not implemented.');
   }
   private tasks = signal<Task[]>([]);
+  private loggingService = inject(LoggingService);
 
   allTasks = this.tasks.asReadonly();
 
@@ -21,6 +23,7 @@ export class TasksService {
     };
 
     this.tasks.update((oldTasks) => [...oldTasks, newTask]);
+    this.loggingService.log('ADDED TASK with title' + taskData.title);
   }
 
   updateTaskStatus(taskId: string, newStatus: TaskStatus) {
@@ -29,5 +32,6 @@ export class TasksService {
         task.id === taskId ? { ...task, status: newStatus } : task
       )
     );
+    this.loggingService.log('CHANGE TASK STATUS TITLE' + newStatus);
   }
 }
